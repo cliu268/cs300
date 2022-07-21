@@ -1,6 +1,5 @@
 // Restaurant Customers
 // https://xjoi.net/contest/4359/problem/3
-
 /*
 You are given the arrival and leaving times of n customers in a restaurant.
 What was the maximum number of customers in the restaurant at any time?

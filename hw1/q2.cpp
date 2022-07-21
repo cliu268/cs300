@@ -32,9 +32,21 @@ SAMPLE INPUT:
 
 SAMPLE OUTPUT:
 5
-
 In this example, 5+1+6+2+14 = 28.
 Problem credits: Brian Dean
+
+edge case SAMPLE INPUT:
+7
+3
+5
+1
+6
+2
+14
+11
+
+edge case SAMPLE OUTPUT:
+7
 */
 #include <iostream>
 #include <stdio.h>
@@ -47,8 +59,8 @@ using namespace std;
 typedef long long ll;
 
 int main(void) {
-    // freopen("div7.in", "r", stdin);
-    // freopen("div7.out", "w", stdout);    
+    freopen("div7.in", "r", stdin);
+    freopen("div7.out", "w", stdout);    
     int n;
     cin >> n;
     vector<ll> prefix_sum(n+1);
@@ -66,6 +78,7 @@ int main(void) {
         }
         range_end[prefix_sum[i]] = i;
     }
+    range_start[0] = 0;   // if prefix_sum for both item i and j are divisible by 7, the range is NOT i to j but max(i, j) 
     int max_range = 0;
     for (int i = 0; i < 7; i++) {
         max_range = max(max_range, range_end[i] - range_start[i]);
