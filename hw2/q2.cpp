@@ -20,11 +20,10 @@ Example Input:
 5 7
 2 -1 3 5 -2
 
-2 1 4 9 7
-2 1 4 2 0
-
 Example Output:
 2
+
+Hint: prefix sum, with map. Refer to Week 1's homework problem "Subsequences Summing to Sevens".
 */
 #include <iostream>
 #include <stdio.h>

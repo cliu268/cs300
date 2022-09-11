@@ -47,6 +47,9 @@ edge case SAMPLE INPUT:
 
 edge case SAMPLE OUTPUT:
 7
+
+Hint: to consider if the sum is sevens, you can simplify to consider the remainder of the sum % 7 into p_sum[i], 
+and then the sum of range [l,r] is sevens as long as p_sum[r] == p_sum[l-1].
 */
 #include <iostream>
 #include <stdio.h>

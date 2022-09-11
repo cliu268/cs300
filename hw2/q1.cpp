@@ -37,6 +37,7 @@ S
 SAMPLE OUTPUT:
 4
 Problem credits: Mark Chen and Brian Dean
+Hint: prefix sum. refere to week 1's class exercise of "Pivot Index of Array"
 */
 #include <iostream>
 #include <stdio.h>
