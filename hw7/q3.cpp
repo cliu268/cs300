@@ -22,3 +22,48 @@ Sample output:
 
 Notes: 1 <= N <= 10000, 1 <= K <= 10000, 1 <= L_i <= 100000
 */
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll n, k;
+multiset<ll> ropes;
+
+bool works(ll middle){
+    ll sum=0;
+    for (auto it = ropes.begin(); it != ropes.end(); it++){
+        sum += *it / middle;
+    }
+    if(sum>=k){
+        return true;
+    }
+    return false;
+}
+
+int main(){
+
+    cin >> n >> k;
+
+    for(ll i=0; i<n; i++){
+        float x;
+        cin >> x;
+        ropes.insert(x*100);
+    }
+
+    ll ans=0;
+    auto it = ropes.end();
+    it--;
+    ll l=1, r=*it;
+
+    while(l<=r){
+        ll mid=(l+r)/2;
+        if(works(mid)){
+            ans=mid;
+            l=mid+1;
+        }
+        else{
+            r=mid-1;
+        }
+    }
+
+    printf("%.2f\n", ans/100.0);
+}

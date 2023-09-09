@@ -33,3 +33,31 @@ Output:
 8
 -1
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n, m; scanf("%d %d", &n, &m);
+  vector<int> tickets(n);
+  for (int i=0; i<n; i++) {
+    scanf("%d", &tickets[i]);
+  }
+  vector<int> customers(m);
+  for (int i=0; i<m; i++) {
+    scanf("%d", &customers[i]);
+  }
+  sort(tickets.begin(), tickets.end(), greater<int> ());
+  for (int i=0; i<m; i++) {
+    auto lower=lower_bound(tickets.begin(), tickets.end(), customers[i], greater<int>());
+    if (lower==tickets.end()) {
+      printf("%d", -1);
+      printf("\n");
+      continue;
+    }
+    else {
+      printf("%d", tickets[lower-tickets.begin()]);
+      printf("\n");
+      tickets.erase(tickets.begin()+(lower-tickets.begin()));
+    }
+  }
+}

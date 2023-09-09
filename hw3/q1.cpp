@@ -37,3 +37,37 @@ Example Output:
 1
 2
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n,q; scanf("%d %d", &n, &q);
+  int prefix[n+1][n+1];
+  int arr[n+1][n+1];
+  for (int i=0; i<=n; i++) {
+    prefix[i][0]=0;
+    prefix[0][i]=0;
+    arr[i][0]=0;
+    arr[0][i]=0;
+  }
+   
+  for (int i=1; i<=n; i++) {
+    string s; cin>>s;
+    for (int j=0; j<n; j++) {
+      prefix[i][j+1]=prefix[i][j]+prefix[i-1][j+1]-prefix[i-1][j];
+      if (s[j]=='*') {
+        arr[i][j+1]=1;
+        prefix[i][j+1]++;
+      }
+      else {
+        arr[i][j+1]=0;
+      }
+    }
+  }
+  for (int i=0; i<q; i++) {
+    int y1, x1, y2, x2; scanf("%d %d %d %d", &y1, &x1, &y2, &x2);
+    int ans=prefix[y2][x2]-prefix[y1-1][x2]-prefix[y2][x1-1]+prefix[y1-1][x1-1];
+    printf("%d", ans);
+    printf("\n");
+  }
+}

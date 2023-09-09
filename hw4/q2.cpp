@@ -23,3 +23,75 @@ Constraints:
 1 <= n <= 5000
 1 <= x, a_i <= 10^9
 */
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main(){
+    ll n, x;
+    cin >> n >> x;
+
+    vector<ll> num(n);
+    vector<ll> uns(n);
+
+    for(ll i=0; i<n; i++){
+        cin >> num[i];
+        uns[i] = num[i];
+    }
+
+    sort(num.begin(), num.end());
+
+    ll leftp=1, rightp=n-1, basep=0;
+    int ans=0;
+
+    for(int i=0; i<n; i++){
+        int temp = x - num[basep];
+        while(leftp<rightp){
+            if(num[leftp]+num[rightp]==temp){
+                ans++;
+                break;
+            }
+            if(num[leftp]+num[rightp]<temp){
+                leftp++;
+            }
+            if(num[leftp]+num[rightp]>temp){
+                rightp--;
+            }
+        }
+        if(ans==0){
+            basep++;
+            leftp= basep+1;
+            rightp= n-1;
+        }
+        
+    }
+    
+
+    if(ans==0){
+        cout << "IMPOSSIBLE" << endl;
+    }
+    else{
+        vector<int> rep(3);
+        rep[0] = num[leftp];
+        rep[1] = num[rightp];
+        rep[2] = num[basep];
+
+        //cout << rep[0] << " " << rep[1] << " " << rep[2] << endl;
+
+        int cnt=0;
+
+        for(int i=0; i<n; i++){
+            if(!rep.empty()){
+                for (auto itr = rep.begin(); itr != rep.end(); ) {
+                    if(uns[i] == *itr){
+                        cout << i+1 << " ";
+                        itr = rep.erase(itr);  
+                        break;                      
+                    } else {
+                        itr++;
+                    }
+                }
+            }
+        }
+    }
+}

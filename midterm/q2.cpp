@@ -32,3 +32,33 @@ Problem credits: Nick Wu
 Hint:
 Diamond collector: two pointers
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n, k; scanf("%d %d", &n, &k);
+  vector<int> diamonds;
+  for (int i=0; i<n; i++) {
+    int x; cin>>x;
+    diamonds.push_back(x);
+  }
+  sort(diamonds.begin(), diamonds.end());
+  int i=0; int j=i+1;
+  int ans=0;
+  int found=false;
+  while (i<j && j<n) {
+    if (diamonds[j]>diamonds[i]+k) {
+      found=true;
+      ans=max(ans, j-i);
+      i++; j=i+1;
+    }
+    else {
+      j++;
+    }
+  }
+  if (!found) {
+    cout<<n;
+    return 0;
+  }
+  cout<<ans;
+}

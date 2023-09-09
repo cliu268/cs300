@@ -33,3 +33,32 @@ In this example, Bessie can see the first and last mountain. The second mountain
 
 Problem credits: Brian Dean
 */
+// Etaw answer still wrong 90/100
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n; scanf("%d", &n);
+  vector<vector<int>> peaks;
+  for (int i=0; i<n; i++) {
+    int x,y; scanf("%d %d", &x, &y);
+    peaks.push_back({x-y, x+y});
+  }
+  sort(peaks.begin(), peaks.end());
+  int ans=n;
+  int i=0;
+  while (i<n-1) {
+    for (int j=i+1; j<n; j++) {
+      if (peaks[j][1]>peaks[i][1]) {
+        ans-=(j-i-1);
+        i=j;
+        break;
+      }
+      if (j==(n-1)) {
+        ans-=(n-1-i);
+        i=n-1;
+      }
+    }
+  }
+  printf("%d", ans);
+}

@@ -39,17 +39,35 @@ SAMPLE OUTPUT:
 Problem credits: Mark Chen and Brian Dean
 Hint: prefix sum. refere to week 1's class exercise of "Pivot Index of Array"
 */
-#include <iostream>
-#include <stdio.h>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <map>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
-
-int main(void) {
-    // freopen("hps.in", "r", stdin);
-    // freopen("hps.out", "w", stdout);        
-    return 0;
+ 
+int main() {
+  int n; cin>>n;
+  char letters[n+1];
+  int paper[n+1]; int scissor[n+1]; int hoof[n+1];
+  paper[0]=0; scissor[0]=0; hoof[0]=0;
+  for (int i=1; i<=n; i++) {
+    cin>>letters[i];
+    paper[i]=paper[i-1]; scissor[i]=scissor[i-1]; hoof[i]=hoof[i-1];
+    if (letters[i]=='P') {
+      paper[i]++;
+    }
+    if (letters[i]=='H') {
+      hoof[i]++;
+    }
+    if (letters[i]=='S') {
+      scissor[i]++;
+    }
+  }
+  int ans=max(paper[n], max(scissor[n], hoof[n]));
+  for (int i=1; i<=n; i++) {
+    ans=max(ans, paper[i]+hoof[n]-hoof[i]);
+    ans=max(ans, paper[i]+scissor[n]-scissor[i]);
+    ans=max(ans, hoof[i]+ paper[n]-paper[i]);
+    ans=max(ans, hoof[i]+ scissor[n]-scissor[i]);
+    ans=max(ans, scissor[i]+paper[n]-paper[i]);
+    ans=max(ans, scissor[i]+hoof[n]-hoof[i]);
+  }
+  cout<<ans;
 }

@@ -45,3 +45,35 @@ state to the following:
 All that remains is to apply the machine to the upper-left rectangle containing the two 1s, and he is finished. In total, 
 this is just 2 applications.
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void flip(vector<string> &vect, int x, int y) {
+  for (int i=0; i<=x; i++) {
+    for (int j=0; j<=y; j++) {
+      if (vect[i][j]=='0') {
+        vect[i][j]='1';
+      }
+      else {
+        vect[i][j]='0';
+      }
+    }
+  }
+}
+int main() {
+  int n; scanf("%d", &n);
+  vector<string> cows(n);
+  for (int i=0; i<n; i++) {
+    cin>>cows[i];
+  }
+  int ans=0;
+  for (int i=n-1; i>=0; i--) {
+    for (int j=n-1; j>=0; j--) {
+      if (cows[i][j]=='1') {
+        flip(cows, i, j);
+        ans++;
+      }
+    }
+  }
+  printf("%d", ans);
+}

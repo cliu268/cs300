@@ -35,3 +35,40 @@ Problem credits: Brian Dean
 Hint:
 My cow ate my homework: run prefix sum when going backward from the end of the array
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n; scanf("%d", &n);
+  float prefix[n+1]; prefix[n]=0.0;
+  vector<float> numbers;
+  for (int i=0; i<n; i++) {
+    float x; scanf("%f", &x);
+    numbers.push_back(x);
+    prefix[i]=x;
+  }
+  float mini[n]; mini[n-1]=numbers[n-1];
+  for (int i=n-2; i>=0; i--) {
+    mini[i]=min(mini[i+1], numbers[i]);
+  }
+  for (int i=n-1; i>=0; i--) {
+    prefix[i]+=prefix[i+1];
+  }
+  float maxi=0.0;
+  vector<int> counter;
+  for (int i=n-1; i>=1; i--) {
+    if (((prefix[i]-mini[i])/float(n-i-1))>maxi) {
+      maxi=(prefix[i]-mini[i])/(float(n-i-1));
+      vector<int> temp;
+      counter=temp;
+      counter.push_back(i);
+    }
+    else if (((prefix[i]-mini[i])/float(n-i-1))==maxi) {
+      counter.push_back(i);
+    }
+  }
+  sort(counter.begin(), counter.end());
+  for (int i=0; i<counter.size(); i++) {
+    cout<<counter[i]<<"\n";
+  }
+}

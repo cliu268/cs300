@@ -1,5 +1,6 @@
-// Game of Hammering the Gophers
+// Game of Hammering the Gophers Whac-A-Mole
 // https://xjoi.net/contest/4847/problem/2
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6461&fragments=12041&problemId=1317
 /*
 Time Limit: 1000.  Memory Limit: 65536
 Description:
@@ -32,3 +33,115 @@ Data Range:
 1<=n<=100
 Points <=100
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n; scanf("%d", &n);
+  vector<int> times(n);
+  for (int i=0; i<n; i++) {
+    scanf("%d", &times[i]);
+  }
+  vector<int> values(n);
+  for (int i=0; i<n; i++) {
+    scanf("%d", &values[i]);
+  }
+  map<int, vector<int>, greater<int>> gophers;
+  for (int i=0; i<n; i++) {
+    if (gophers.find(values[i])!=gophers.end()) {
+      gophers[values[i]].push_back(times[i]);
+      continue;
+    }
+    gophers[values[i]]={times[i]};
+  }
+  map<int, vector<int>>::iterator it;
+  vector<int> order(n, 0);
+  for (it=gophers.begin(); it!=gophers.end(); it++) {
+    for (int x=0; x<it->second.size(); x++) {
+      int i=min(it->second[x]-1, n-1);
+      while (order[i]!=0 && i>=0) {
+        if (i==0) {
+          i=-1;
+          break;
+        }
+        i--;
+      }
+      if (i<0) {
+        continue;
+      }
+      else {
+        order[i]=it->first;
+      }
+    }
+  }
+  int ans=0;
+  for (int i=0; i<n; i++) {
+    ans+=order[i];
+    // cout<<order[i]<<" ";
+  }
+  printf("%d", ans);
+}
+
+// Ev answer that is wrong 40/100 so far
+// #include<bits/stdc++.h>
+// using namespace std;
+// typedef long long ll;
+
+// bool sortbysec(const pair<ll, ll> &a, const pair<ll, ll> &b){
+//     return(a.second > b.second);
+// }
+
+// int main(){
+//     ll n; 
+//     cin >> n;
+
+//     vector<pair<ll, ll>> m (n);
+//     multiset<ll> size;
+
+//     for(ll i=0; i<n; i++){
+//         cin >> m[i].first;
+//         size.insert(m[i].first);
+//     }
+//     for(ll i=0; i<n; i++){
+//         cin >> m[i].second;
+//     }
+
+//     sort(m.begin(), m.end(), sortbysec);
+//     auto it = size.end();
+//     it--;
+
+//     vector<ll>ans(*it+1, 0);
+//     multiset<ll> index;
+
+//     for(ll i=1; i<*it+1; i++){
+//         index.insert(i);
+//     }
+
+//     for(ll i=0; i<n; i++){
+//         if(ans[m[i].first]==0){
+//             ans[m[i].first] = m[i].second;
+//             auto piss = index.find(m[i].first);
+//             index.erase(piss);
+//             // cout << "devil" << endl;
+//         }
+//         else{
+//             // cout << "hi" << endl;
+//             if(ans[1]==0){
+//                 auto pit = index.lower_bound(m[i].first);
+//                 pit--;
+//                 // cout << m[i].first << " " << *pit << endl;
+//                 ans[*pit] = m[i].second;
+//                 index.erase(*pit);
+//             }
+            
+//         }
+//     }
+
+//     ll sum=0;
+
+//     for(ll i=0; i<*it+1; i++){
+//         sum+= ans[i];
+//     }
+
+//     cout << sum << endl;
+// }

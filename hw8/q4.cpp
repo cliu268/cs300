@@ -1,6 +1,6 @@
 // Wormhole Sort
 // https://xjoi.net/contest/4660/problem/4
-// 
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6461&fragments=12041&problemId=15442
 /*
 Farmer John's cows have grown tired of his daily request that they sort themselves before leaving the barn each morning. They 
 have just completed their PhDs in quantum physics, and are ready to speed things up a bit.
@@ -56,3 +56,86 @@ No wormholes are needed to sort the cows.
 Problem credits: Dhruv Rohatgi
 For wormhole search, you do not have to use binary search. Linear search with DSU will be fine.
 */
+// Etaw wrong answer 10/100
+#include <algorithm>
+#include <iostream>
+using namespace std;
+ 
+int n, m;
+const int MAXN = 100001;
+struct Wormhole {
+  int a, b, width;
+};
+bool CompareWormhole(Wormhole w1, Wormhole w2) { return w1.width > w2.width; }
+ 
+// Global array initialized to zeros.
+int swap_groups[MAXN], l[MAXN];
+// Standard DSU implementation of find() and unite().
+int find(int x) {
+  return x == swap_groups[x] ? x : swap_groups[x] = find(swap_groups[x]);
+}
+void unite(int x, int y) {
+  int root_x = find(x);
+  int root_y = find(y);
+  if (root_x != root_y)
+    swap_groups[root_x] = root_y;
+}
+ 
+bool verify() {
+  for (int i = 1; i <= n; i++) {
+    if (i != l[i] && find(i) != find(l[i]))
+      return false;
+  }
+  return true;
+}
+ 
+int main() {
+  cin >> n >> m;
+  int out_space_cow_count = 0;
+  for (int i = 1; i <= n; i++) {
+    cin >> l[i];
+    if (l[i] != i)
+      out_space_cow_count++;
+  }
+ 
+  Wormhole wormholes[m];
+  for (int i = 0; i < m; i++) {
+    cin >> wormholes[i].a >> wormholes[i].b >> wormholes[i].width;
+  }
+  if (out_space_cow_count == 0) {
+    cout << -1 << endl;
+    return 0;
+  }
+ 
+  // Sort all wormholes by width from widest to narrowest.
+  sort(wormholes, wormholes + m, CompareWormhole);
+ 
+  // Initial swap group membership.
+  for (int i = 1; i <= n; i++)
+    swap_groups[i] = i;
+ 
+  int max_wormhole_width = -1;
+ 
+  // Linear search for max wormhole width.
+  // for (int i = 0; i < m; i++) {
+  //   // DSU unite of swap group membership.
+  //   unite(wormholes[i].a, wormholes[i].b);
+  //   max_wormhole_width = wormholes[i].width;
+  //   if (verify())
+  //     break;
+  // }
+  int left=0; int right=m-1;
+  while (left<=right) {
+    int middle=(left+right)/2;
+    unite(wormholes[middle].a, wormholes[middle].b);
+    if (verify()) {
+      max_wormhole_width=wormholes[middle].width;
+      left=middle+1;
+    }
+    else {
+      right=middle-1;
+    }
+  }
+ 
+  cout << max_wormhole_width << endl;
+}

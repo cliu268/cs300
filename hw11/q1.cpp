@@ -24,3 +24,30 @@ Sample input：
 Sample output：
 2
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n; cin>>n;
+  vector<vector<int>> classes;
+  for (int i=0; i<n; i++) {
+    int x, y; cin>>x>>y;
+    classes.push_back({y, x});
+  }
+  sort(classes.begin(), classes.end());
+  int i=1; int left=classes[0][1]; int right=classes[0][0];
+  int ans=1;
+  while (i<n) {
+    if (classes[i][1]>=right) {
+      ans++;
+      left=classes[i][1];
+      right=classes[i][0];
+      i++;
+      continue;
+    }
+    else {
+      i++;
+    }
+  }
+  cout<<ans;
+}

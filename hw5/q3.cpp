@@ -22,3 +22,51 @@ Example Input:
 Example Output:
 8
 */
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main(void){
+    int n, a, b;
+    cin >> n >> a >> b;
+    
+    vector<ll> nums(n, 0);
+    vector<ll> psum(n, 0);
+
+    for(int i=0; i<n; i++){
+        cin >> nums[i];
+        
+        if(i==0){
+            psum[i] = nums[i];
+        }
+        else{
+            psum[i] = psum[i-1] + nums[i];
+        }
+    }
+
+    int start = 0, end = b;
+    ll temp=-1000000000000, ans = 0;
+    multiset<ll> max_psum;
+
+    for(int i=a-1; i<b; i++){
+        max_psum.insert(psum[i]);
+    }
+
+    multiset<ll>::iterator it = max_psum.end();
+    it--;
+    ans = *it;
+
+    for(int i=0; i<n-a; i++){
+        start = i+a-1;
+        end = i+b;
+        max_psum.erase(max_psum.find(psum[start]));
+        if (end < n) max_psum.insert(psum[end]);
+        it = max_psum.end();
+        it--;
+        ans = max(ans, *it-psum[i]);
+    }
+
+    cout << ans << endl;
+
+}
+

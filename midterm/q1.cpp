@@ -52,3 +52,19 @@ stack height is 1, since 1 is the middle element in the sorted ordering
 Hint:
 Haybale stacking: use prefix sum to update stack heights with interval inputs
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n, k; scanf("%d %d", &n, &k);
+  vector<int> prefix(n+1, 0);
+  for (int i=0; i<k; i++) {
+    int a,b; scanf("%d %d", &a, &b);
+    prefix[a]+=1; prefix[b+1]+=-1;
+  }
+  for (int i=1; i<=n; i++) {
+    prefix[i]+=prefix[i-1];
+  }
+  sort(prefix.begin(), prefix.end());
+  cout<<prefix[n/2+1];
+}

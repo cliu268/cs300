@@ -39,3 +39,41 @@ SAMPLE OUTPUT:
 
 Problem credits: Brian Dean
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+bool sortsecond(const pair<int, int> &a, const pair<int, int> &b) {
+  if (a.second==b.second) {
+    return a.first<b.first;
+  }
+  return (a.second<b.second);
+}
+ 
+int main() {
+  int c, n; cin>>c>>n;
+  vector<int> chickens(c);
+  vector<pair<int, int>> cows;
+  for (int i=0; i<c; i++) {
+    cin>>chickens[i];
+  }
+  for (int i=0; i<n; i++) {
+    int x, y; cin>>x>>y;
+    pair<int, int> temp;
+    temp.first=x;
+    temp.second=y;
+    cows.push_back(temp);
+  }
+  sort(cows.begin(), cows.end(), sortsecond);
+  sort(chickens.begin(), chickens.end());
+  int ans=0;
+  for (int i=0; i<n; i++) {
+    for (int j=0; j<chickens.size(); j++) {
+      if (chickens[j]>=cows[i].first && chickens[j]<=cows[i].second) {
+        ans++;
+        chickens.erase(chickens.begin()+j);
+        break;
+      }
+    }
+  }
+  cout<<ans;
+}

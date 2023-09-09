@@ -31,3 +31,22 @@ Problem credits: Brian Dean
 Hint:
 Why did the cow cross the road II: sliding window
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n, k, b; scanf("%d %d %d", &n, &k, &b);
+  vector<int> prefix(n+1, 0); prefix[0]=0;
+  for (int i=0; i<b; i++) {
+    int x; scanf("%d", &x);
+    prefix[x]=1;
+  }
+  for (int i=1; i<=n; i++) {
+    prefix[i]+=prefix[i-1];
+  }
+  int ans=n;
+  for (int i=1; i<=n-k+1; i++) {
+    ans=min(ans, prefix[i+k-1]-prefix[i-1]);
+  }
+  printf("%d", ans);
+}

@@ -1,5 +1,6 @@
 // Cow Dance Show
 // https://xjoi.net/contest/4660/problem/1
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6462&fragments=12039&problemId=15297
 /*
 After several months of rehearsal, the cows are just about ready to put on their annual dance performance; this year they are 
 performing the famous bovine ballet "Cowpelia".
@@ -34,4 +35,88 @@ SAMPLE INPUT:
 
 SAMPLE OUTPUT:
 4
+*/
+// ETAW solution
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n, t; cin>>n>>t;
+  vector<int> duration(n);
+  for (int i=0; i<n; i++) {
+    cin>>duration[i];
+  }
+  int ans=n;
+  int left=1; int right=n;
+  while (left<=right) {
+    int middle=(left+right)/2;
+    priority_queue<int, vector<int>, greater<int>> q;
+    int maxi=0;
+    for (int i=0; i<middle; i++) {
+      maxi=max(maxi, duration[i]);
+      q.push(duration[i]);
+    }
+    for (int i=middle; i<n; i++) {
+      q.push(q.top()+duration[i]);
+      maxi=max(maxi, q.top()+duration[i]);
+      q.pop();
+    }
+    if (maxi<=t) {
+      ans=min(ans, middle);
+      right=middle-1;
+    }
+    else {
+      left=middle+1;
+    }
+  }
+  cout<<ans;
+}
+
+// EV solution
+/*
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main(){
+    ll n, tmax;
+    cin >> n >> tmax;
+
+    vector<ll> d(n, 0);
+
+    for(ll i=0; i<n; i++){
+        cin >> d[i];
+    }
+
+    ll k=n;
+    
+    ll l=0, r=n;
+    
+
+    while(l<=r){
+        ll mid = (l+r)/2;
+        priority_queue<ll, vector<ll>, greater<ll>> q;
+        ll max_time=0;
+        for(ll i=0; i<mid; i++){
+            q.push(d[i]);
+            max_time=max(max_time, d[i]);
+        }
+        for(ll i=mid; i<n; i++){
+            ll x = q.top();
+            q.pop();
+            x+=d[i];
+            q.push(x);
+            max_time=max(max_time, x);
+        }
+        if(max_time>tmax){
+            l=mid+1;
+        }
+        else{
+            r=mid-1;
+            k=min(k, mid);
+        }
+    }
+
+    cout << k << endl;
+}
 */
