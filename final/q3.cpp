@@ -36,3 +36,36 @@ Convention: binary search on answers
 For binary search on answers, you usually have to implement your own binary search procedure (with check(), see Week 7 and 8 
 class examples). Cannot use std::lower_bound() or std::upper_bound()
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n, m, c; cin>>n>>m>>c;
+  vector<int> arrival(n);
+  for (int i=0; i<n; i++) {
+    cin>>arrival[i];
+  }
+  sort(arrival.begin(), arrival.end());
+  int i=0; int j=arrival[n-1];
+  int ans=0;
+  while (i<=j) {
+    int middle=(i+j)/2;
+    int first=arrival[0]; int index=0;
+    int cars=1;
+    for (int i=1; i<n; i++) {
+      if ((arrival[i]-first)>middle || (i-index+1)>c) {
+        first=arrival[i];
+        cars++;
+        index=i;
+      }
+    }
+    if (cars>m) {
+      i=middle+1;
+    }
+    else {
+      j=middle-1;
+      ans=middle;
+    }
+  }
+  cout<<ans;
+}

@@ -34,3 +34,23 @@ Problem credits: Dhruv Rohatgi
 Hint:
 Lemonade Line: find the minimum possible number of cows, not the maximum!
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n; cin>>n;
+  vector<int> wait(n);
+  for (int i=0; i<n; i++) {
+    cin>>wait[i];
+  }
+  sort(wait.begin(), wait.end(), greater<int> ());
+  queue<int> line;
+  int i=0;
+  while (i<n) {
+    if (line.size()<=wait[i]) {
+      line.push(i);
+    }
+    i++;
+  }
+  cout<<line.size();
+}

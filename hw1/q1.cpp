@@ -35,52 +35,93 @@ SAMPLE OUTPUT:
 
 Problem credits: Nick Wu
 */
-#include <iostream>
-#include <stdio.h>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <map>
-#include <set>
+// #include <iostream>
+// #include <stdio.h>
+// #include <algorithm>
+// #include <vector>
+// #include <queue>
+// #include <map>
+// #include <set>
+// using namespace std;
+
+// int main(void) {
+//     // freopen("bcount.in", "r", stdin);
+//     // freopen("bcount.out", "w", stdout);    
+//     int n, q;
+//     cin >> n >> q;
+//     vector<int> cows(n);
+//     vector<int[3]> breed(n);
+
+//     for (int i = 0; i < n; i++) {
+//         cin >> cows[i];
+//         if (i == 0) {
+//             breed[i][cows[i]-1] = 1;
+//         } else {
+//             breed[i][0] = breed[i-1][0];
+//             breed[i][1] = breed[i-1][1];
+//             breed[i][2] = breed[i-1][2];
+//             breed[i][cows[i]-1] = breed[i-1][cows[i]-1] + 1;
+//         }
+//     }
+//     for (int i = 0; i < q; i++) {
+//         int answer[3] = {0,0,0};
+//         int start, end;
+//         cin >> start >> end;
+//         // brute force solution
+//         /*
+//         for (int j = start - 1; j < end; j++) {
+//             answer[cows[j] - 1] += 1;
+//         }
+//         cout << answer[0] << " " << answer[1] << " " << answer[2] << endl;
+//         */
+//         // prefix sum solution
+//         if (start == 1) cout << breed[end-1][0] << " " << breed[end-1][1] << " " << breed[end-1][2] << endl;
+//         else {
+//             cout << breed[end-1][0] - breed[start-2][0] << " " 
+//             << breed[end-1][1] - breed[start-2][1] << " " 
+//             << breed[end-1][2] - breed[start-2][2] << endl;
+//         }
+//     }
+//     return 0;
+// }
+
+// Etaw
+#include <bits/stdc++.h>
 using namespace std;
-
-int main(void) {
-    // freopen("bcount.in", "r", stdin);
-    // freopen("bcount.out", "w", stdout);    
-    int n, q;
-    cin >> n >> q;
-    vector<int> cows(n);
-    vector<int[3]> breed(n);
-
-    for (int i = 0; i < n; i++) {
-        cin >> cows[i];
-        if (i == 0) {
-            breed[i][cows[i]-1] = 1;
-        } else {
-            breed[i][0] = breed[i-1][0];
-            breed[i][1] = breed[i-1][1];
-            breed[i][2] = breed[i-1][2];
-            breed[i][cows[i]-1] = breed[i-1][cows[i]-1] + 1;
-        }
+  
+int main() {
+  int n,q; cin>>n>>q;
+  int hol[n];
+  int gue[n];
+  int jer[n];
+  int x; cin>>x;
+  if (x==1) {
+    hol[0]=1; gue[0]=0; jer[0]=0;
+  }
+  if (x==2) {
+    gue[0]=1; hol[0]=0; jer[0]=0;
+  }
+  if (x==3) {
+    jer[0]=1; hol[0]=0; gue[0]=0;
+  }
+  for (int i=1; i<n; i++) {
+    int y; cin>>y;
+    if (y==1) {
+      hol[i]=hol[i-1]+1; gue[i]=gue[i-1]; jer[i]=jer[i-1];
     }
-    for (int i = 0; i < q; i++) {
-        int answer[3] = {0,0,0};
-        int start, end;
-        cin >> start >> end;
-        // brute force solution
-        /*
-        for (int j = start - 1; j < end; j++) {
-            answer[cows[j] - 1] += 1;
-        }
-        cout << answer[0] << " " << answer[1] << " " << answer[2] << endl;
-        */
-        // prefix sum solution
-        if (start == 1) cout << breed[end-1][0] << " " << breed[end-1][1] << " " << breed[end-1][2] << endl;
-        else {
-            cout << breed[end-1][0] - breed[start-2][0] << " " 
-            << breed[end-1][1] - breed[start-2][1] << " " 
-            << breed[end-1][2] - breed[start-2][2] << endl;
-        }
+    if (y==2) {
+      gue[i]=gue[i-1]+1; hol[i]=hol[i-1]; jer[i]=jer[i-1];
     }
-    return 0;
+    if (y==3) {
+      jer[i]=jer[i-1]+1; hol[i]=hol[i-1]; gue[i]=gue[i-1];
+    }
+  }
+  for (int i=0; i<q; i++) {
+    int a,b; cin>>a>>b;
+    if (a==1) {
+      cout<<hol[b-1]<<" "<<gue[b-1]<<" "<<jer[b-1]<<"\n";
+      continue;
+    }
+    cout<<hol[b-1]-hol[a-2]<<" "<<gue[b-1]-gue[a-2]<<" "<<jer[b-1]-jer[a-2]<<"\n";
+  }
 }

@@ -1,6 +1,7 @@
 // Rectangular Pasture
 // https://xjoi.net/contest/4441/problem/3
 // http://usaco.org/index.php?page=viewproblem2&cpid=1063
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6465&fragments=12033&problemId=15417
 /*
 Farmer John's largest pasture can be regarded as a large 2D grid of square "cells" (picture a huge chess board). 
 Currently, there are N cows occupying some of these cells (1≤N≤2500).
@@ -38,3 +39,4 @@ Test cases 7-12 satisfy N≤500.
 Test cases 13-20 satisfy no additional constraints.
 Problem credits: Benjamin Qi
 */
+// USCACO Dec. 2020 Silver Q2 solution http://usaco.org/current/data/sol_prob2_silver_dec20.html

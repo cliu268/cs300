@@ -1,5 +1,6 @@
 // Restaurant Customers
 // https://xjoi.net/contest/4359/problem/3
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6466&fragments=12032&problemId=14076
 /*
 You are given the arrival and leaving times of n customers in a restaurant.
 What was the maximum number of customers in the restaurant at any time?
@@ -42,6 +43,7 @@ Sample Input2:
 Sample Output2:
 1
 */
+// Ev
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
@@ -78,3 +80,37 @@ int main(void) {
     cout << answer;
     return 0;
 }
+
+// Etaw
+// #include <bits/stdc++.h>
+// typedef long long ll;
+// using namespace std;
+  
+// int main() {
+//   ll n; scanf("%lld", &n);
+//   map<ll, ll> sums;
+//   for (ll i=0; i<n; i++) {
+//     ll a,b; scanf("%lld %lld", &a, &b);
+//     if (sums.find(a)==sums.end()) {
+//       sums[a]=1;
+//     }
+//     else {
+//       sums[a]++;
+//     }
+//     if (sums.find(b)==sums.end()) {
+//       sums[b]=-1;
+//     }
+//     else {
+//       sums[b]--;
+//     }
+//   }
+//   map<ll, ll>::iterator it=sums.begin();
+//   int ans=0;
+//   int currElement=0;
+//   for (it=sums.begin(); it!=sums.end(); it++) {
+//     currElement+=it->second;
+//     ans=max(ans, currElement);
+//   }
+//   cout<<ans;
+// }
+

@@ -1,5 +1,6 @@
 // Subarray Sums II
-// https://xjoi.net/contest/4389/problem/3 
+// https://xjoi.net/contest/4389/problem/3
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6466&fragments=12032&problemId=14112
 /*
 Time limit: 1.00 s
 Memory limit: 512 MB
@@ -25,16 +26,55 @@ Example Output:
 
 Hint: prefix sum, with map. Refer to Week 1's homework problem "Subsequences Summing to Sevens".
 */
-#include <iostream>
-#include <stdio.h>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <map>
-#include <set>
-using namespace std;
+// Etaw
+// #include <bits/stdc++.h>
+// typedef long long ll;
+// using namespace std;
+ 
+// int main() {
+//   ll n,x; scanf("%lld %lld", &n, &x);
+//   map<ll, ll> sums;
+//   ll num[n+1];
+//   num[0]=0;
+//   ll ans=0;
+//   for (ll i=1; i<n+1; i++) {
+//     ll p; scanf("%lld", &p);
+//     num[i]=num[i-1]+p;
+//     if (num[i]==x) {
+//       ans++;
+//     }
+//     if (sums.find(num[i]-x)!=sums.end()) {
+//       ans+=sums[num[i]-x];
+//     }
+//     if (sums.find(num[i])==sums.end()) {
+//       sums[num[i]]=1;
+//     }
+//     else {
+//       sums[num[i]]++;
+//     }
+//   }
+//   printf("%lld", ans);
+// }
 
-int main(void) {
-    
-    return 0;
+// Ev
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main(){
+    ll n, x, p, s=0, ans=0;
+    cin >> n >> x;
+
+    map<ll, ll> nums; //sum : # of subarrays with that sum
+    nums[0] = 1; //one empty subarray has a sum of 0
+
+    for(ll i=1; i<n+1; i++){
+        cin >> p;
+        s+=p;
+
+        ans+= nums[s-x] ? nums[s-x] : 0;
+        nums[s] = nums[s] ? nums[s] + 1: 1;
+    }
+
+    cout << ans << endl;
 }

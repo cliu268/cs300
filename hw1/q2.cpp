@@ -51,41 +51,82 @@ edge case SAMPLE OUTPUT:
 Hint: to consider if the sum is sevens, you can simplify to consider the remainder of the sum % 7 into p_sum[i], 
 and then the sum of range [l,r] is sevens as long as p_sum[r] == p_sum[l-1].
 */
-#include <iostream>
-#include <stdio.h>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <map>
-#include <set>
-using namespace std;
+// #include <iostream>
+// #include <stdio.h>
+// #include <algorithm>
+// #include <vector>
+// #include <queue>
+// #include <map>
+// #include <set>
+// using namespace std;
+// typedef long long ll;
+
+// int main(void) {
+//     freopen("div7.in", "r", stdin);
+//     freopen("div7.out", "w", stdout);    
+//     int n;
+//     cin >> n;
+//     vector<ll> prefix_sum(n+1);
+//     prefix_sum[0] = 0;
+//     int range_start[7] = {};
+//     int range_end[7] = {};
+
+//     for (int i = 1; i <= n; i++) {
+//         ll cur_id;
+//         cin >> cur_id;
+//         prefix_sum[i] = prefix_sum[i-1] + cur_id;
+//         prefix_sum[i] %= 7;
+//         if (range_start[prefix_sum[i]] == 0) {
+//             range_start[prefix_sum[i]] = i;
+//         }
+//         range_end[prefix_sum[i]] = i;
+//     }
+//     range_start[0] = 0;   // if prefix_sum for both item i and j are divisible by 7, the range is NOT i to j but max(i, j) 
+//     int max_range = 0;
+//     for (int i = 0; i < 7; i++) {
+//         max_range = max(max_range, range_end[i] - range_start[i]);
+//     }
+//     cout << max_range;
+//     return 0;
+// }
+
+// Etaw
+#include <bits/stdc++.h>
 typedef long long ll;
-
-int main(void) {
-    freopen("div7.in", "r", stdin);
-    freopen("div7.out", "w", stdout);    
-    int n;
-    cin >> n;
-    vector<ll> prefix_sum(n+1);
-    prefix_sum[0] = 0;
-    int range_start[7] = {};
-    int range_end[7] = {};
-
-    for (int i = 1; i <= n; i++) {
-        ll cur_id;
-        cin >> cur_id;
-        prefix_sum[i] = prefix_sum[i-1] + cur_id;
-        prefix_sum[i] %= 7;
-        if (range_start[prefix_sum[i]] == 0) {
-            range_start[prefix_sum[i]] = i;
+using namespace std;
+ 
+int main() {
+  ll n; scanf("%lld", &n);
+  ll sums[n+1];
+  sums[0]=0;
+  for (int i=1; i<n+1; i++) {
+    ll x;scanf("%lld", &x);
+    sums[i]=(sums[i-1]+x)%7;
+  }
+  ll ans=0;
+  map<int, bool> visited;
+  for (int i=0; i<7; i++) {
+    visited[i]=false;
+  }
+  int numdiff=0;
+  for (int i=n; i>=0; i--) {
+    if (visited[sums[i]]==false) {
+      visited[sums[i]]=true;
+      numdiff++;
+    }
+    else {
+      continue;
+    }
+    for (int j=0; j<i; j++) {
+      if (sums[i]==sums[j]) {
+        if ((i-j)>ans) {
+          ans=i-j;
         }
-        range_end[prefix_sum[i]] = i;
+      }
     }
-    range_start[0] = 0;   // if prefix_sum for both item i and j are divisible by 7, the range is NOT i to j but max(i, j) 
-    int max_range = 0;
-    for (int i = 0; i < 7; i++) {
-        max_range = max(max_range, range_end[i] - range_start[i]);
+    if (numdiff==6) {
+      break;
     }
-    cout << max_range;
-    return 0;
+  }
+  printf("%lld", ans);
 }

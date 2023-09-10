@@ -1,5 +1,6 @@
 // Forest Queries
 // https://xjoi.net/contest/4441/problem/1
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6465&fragments=12033&problemId=14107
 /*
 You are given an n×n grid representing the map of a forest. Each square is either empty or contains a tree. The upper-left square 
 has coordinates (1,1), and the lower-right square has coordinates (n,n).
@@ -37,37 +38,62 @@ Example Output:
 1
 2
 */
+// Etaw
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// int main() {
+//   int n,q; scanf("%d %d", &n, &q);
+//   int prefix[n+1][n+1];
+//   int arr[n+1][n+1];
+//   for (int i=0; i<=n; i++) {
+//     prefix[i][0]=0;
+//     prefix[0][i]=0;
+//     arr[i][0]=0;
+//     arr[0][i]=0;
+//   }
+   
+//   for (int i=1; i<=n; i++) {
+//     string s; cin>>s;
+//     for (int j=0; j<n; j++) {
+//       prefix[i][j+1]=prefix[i][j]+prefix[i-1][j+1]-prefix[i-1][j];
+//       if (s[j]=='*') {
+//         arr[i][j+1]=1;
+//         prefix[i][j+1]++;
+//       }
+//       else {
+//         arr[i][j+1]=0;
+//       }
+//     }
+//   }
+//   for (int i=0; i<q; i++) {
+//     int y1, x1, y2, x2; scanf("%d %d %d %d", &y1, &x1, &y2, &x2);
+//     int ans=prefix[y2][x2]-prefix[y1-1][x2]-prefix[y2][x1-1]+prefix[y1-1][x1-1];
+//     printf("%d", ans);
+//     printf("\n");
+//   }
+// }
+
+// Ev
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 int main() {
-  int n,q; scanf("%d %d", &n, &q);
-  int prefix[n+1][n+1];
-  int arr[n+1][n+1];
-  for (int i=0; i<=n; i++) {
-    prefix[i][0]=0;
-    prefix[0][i]=0;
-    arr[i][0]=0;
-    arr[0][i]=0;
-  }
-   
-  for (int i=1; i<=n; i++) {
-    string s; cin>>s;
-    for (int j=0; j<n; j++) {
-      prefix[i][j+1]=prefix[i][j]+prefix[i-1][j+1]-prefix[i-1][j];
-      if (s[j]=='*') {
-        arr[i][j+1]=1;
-        prefix[i][j+1]++;
-      }
-      else {
-        arr[i][j+1]=0;
-      }
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int n, q; cin>>n>>q;
+    vector<vector<int>> pref(n+1, vector<int>(n+1, 0));
+    for (int i=1; i<=n; i++) {
+        for (int j=1; j<=n; j++) {
+            char a; cin>>a;
+            pref[i][j]=pref[i-1][j]+pref[i][j-1]-pref[i-1][j-1];
+            if (a=='*') {
+                pref[i][j]++;
+            }
+        }
     }
-  }
-  for (int i=0; i<q; i++) {
-    int y1, x1, y2, x2; scanf("%d %d %d %d", &y1, &x1, &y2, &x2);
-    int ans=prefix[y2][x2]-prefix[y1-1][x2]-prefix[y2][x1-1]+prefix[y1-1][x1-1];
-    printf("%d", ans);
-    printf("\n");
-  }
+    while (q--) {
+        int x1, y1, x2, y2; cin>>x1>>y1>>x2>>y2;
+        cout<<pref[x2][y2]-pref[x1-1][y2]-pref[x2][y1-1]+pref[x1-1][y1-1]<<"\n";
+    }
 }

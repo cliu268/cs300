@@ -44,3 +44,24 @@ Hint:
 Sample explanation:
 The best match is this: (2, 1) (8, 10) (5, 4) (5, 7)
 */
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+  int n; cin>>n;
+  vector<int> bulls(n);
+  vector<int> cows(n);
+  for (int i=0; i<n; i++) {
+    cin>>bulls[i];
+  }
+  for (int i=0; i<n; i++) {
+    cin>>cows[i];
+  }
+  sort(bulls.begin(), bulls.end());
+  sort(cows.begin(), cows.end());
+  int ans=0;
+  for (int i=0; i<n; i++) {
+    ans+=abs(bulls[i]-cows[i]);
+  }
+  cout<<ans;
+}

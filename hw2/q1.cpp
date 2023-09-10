@@ -1,6 +1,7 @@
 // Hoof, Paper, Scissors
 // https://xjoi.net/contest/4389/problem/1
 // http://www.usaco.org/index.php?page=viewproblem2&cpid=691
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6466&fragments=12032&problemId=15298
 /*
 You have probably heard of the game "Rock, Paper, Scissors". The cows like to play a similar game they call "Hoof, Paper, Scissors".
 
@@ -71,3 +72,4 @@ int main() {
   }
   cout<<ans;
 }
+// USACO java solution http://www.usaco.org/current/data/sol_hps_silver_jan17.html

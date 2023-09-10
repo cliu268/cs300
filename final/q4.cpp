@@ -54,3 +54,64 @@ Milk visits: DSU
 What kind of farms should be unite()’ed into a subset? Connected? Contains cows of the same breed?
 Use the DSU implementation we learned in Week 11 class https://replit.com/@HarryLuo/DSU-impl#main.cpp
 */
+// Etaw TLE solution 8/100
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int GetParent(int x, vector<int> vect) {
+  if (vect[x]==x) {
+    return x;
+  }
+  return GetParent(vect[x], vect);
+}
+void Unite(int x, int y, vector<int> &vect) {
+  vect[GetParent(x, vect)]=GetParent(y, vect);
+}
+ 
+int main() {
+  int n, m; scanf("%d %d", &n, &m);
+  string s; cin>>s;
+  vector<int> parent(n+1);
+  vector<int> reverse(n+1);
+  for (int i=0; i<=n; i++) {
+    parent[i]=i;
+    reverse[i]=i;
+  }
+  for (int i=0; i<n-1; i++) {
+    int x, y; scanf("%d %d", &x, &y);
+    if (parent[y]!=y) {
+      Unite(y, x, parent);
+      continue;
+    }
+    if (parent[x]==x) {
+      reverse[x]=y;
+    }
+    parent[y]=x;
+  }
+  for (int i=0; i<m; i++) {
+    int a, b; scanf("%d %d", &a, &b);
+    char c; cin>>c;
+    if (a==b) {
+      cout<<(s[a-1]==c);
+      continue;
+    }
+    int j=b; bool broke=false;
+    while(j<n) {
+      if (s[j-1]==c) {
+        printf("%d", 1);
+        broke=true;
+        break;
+      }
+      if (j==a) {
+        break;
+      }
+      if (parent[j]==j) {
+        j=reverse[j];
+      }
+      j=parent[j];
+    }
+    if (!broke) {
+      printf("%d", 0);
+    }
+  }
+}
