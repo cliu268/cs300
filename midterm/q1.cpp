@@ -1,6 +1,7 @@
 // Haybale Stacking
 // https://xjoi.net/contest/4516/problem/1
 // http://www.usaco.org/index.php?page=viewproblem2&cpid=104
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6458&fragments=12036&problemId=15039
 /*
 Feeling sorry for all the mischief she has caused around the farm recently,
 Bessie has agreed to help Farmer John stack up an incoming shipment of hay

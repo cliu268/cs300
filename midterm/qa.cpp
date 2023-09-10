@@ -1,0 +1,1 @@
+// same as q1.cpp

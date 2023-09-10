@@ -1,5 +1,6 @@
 // Binary Search
 // https://xjoi.net/contest/4659/problem/1
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6467&fragments=12037&problemId=1037
 /*
 Time limit:1000 Memory limit:65536
 Description:
@@ -22,3 +23,76 @@ Sample input:
 Sample output:
 3
 */
+// Etaw
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// int main() {
+//   int n, m; cin>>n>>m;
+//   vector<int> numbers(n);
+//   for (int i=0; i<n; i++) {
+//     cin>>numbers[i];
+//   }
+//   int left=0; int right=n-1;
+//   while (left<=right) {
+//     int middle=(left+right)/2;
+//     if (numbers[middle]==m) {
+//       if (numbers[middle-1]!=m || middle==0) {
+//         cout<<middle+1;
+//         return 0;
+//       }
+//       right=middle-1;
+//     }
+//     if (numbers[middle]>m) {
+//       right=middle-1;
+//     }
+//     if (numbers[middle]<m) {
+//       left=middle+1;
+//     }
+//   }
+//   cout<<0;
+// }
+// Ev
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> vec(n);
+    int l=0, r=n-1, mid;
+
+    for(int i=0; i<n; i++){
+        cin >> vec[i];
+    }
+
+    int ans=0;
+    bool pointer=false;
+
+    while(l<=r){
+        mid=(l+r)/2;
+        if(vec[mid]==m){
+            while(vec[mid]==m){
+                ans=mid;
+                mid--;
+            }
+            pointer=true;
+            break;
+        }
+        else if(vec[mid]>m){
+            r= mid-1;
+        }
+        else if(vec[mid]<m){
+            l= mid+1;
+        }
+    }
+
+    if(pointer==true){
+        cout << ans+1 << endl;
+    }
+    else{
+        cout << 0 << endl;
+    }
+    
+}

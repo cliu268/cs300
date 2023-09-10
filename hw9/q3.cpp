@@ -1,6 +1,6 @@
 // Concert Tickets
 // https://xjoi.net/contest/4661/problem/3
-
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6467&fragments=12037&problemId=14021
 /*
 Time limit: 1.00 s
 Memory limit: 512 MB
@@ -33,31 +33,72 @@ Output:
 8
 -1
 */
-#include <bits/stdc++.h>
+// Ev
+#include<bits/stdc++.h>
 using namespace std;
- 
-int main() {
-  int n, m; scanf("%d %d", &n, &m);
-  vector<int> tickets(n);
-  for (int i=0; i<n; i++) {
-    scanf("%d", &tickets[i]);
-  }
-  vector<int> customers(m);
-  for (int i=0; i<m; i++) {
-    scanf("%d", &customers[i]);
-  }
-  sort(tickets.begin(), tickets.end(), greater<int> ());
-  for (int i=0; i<m; i++) {
-    auto lower=lower_bound(tickets.begin(), tickets.end(), customers[i], greater<int>());
-    if (lower==tickets.end()) {
-      printf("%d", -1);
-      printf("\n");
-      continue;
+typedef long long ll;
+
+int main(){
+    ll n, m;
+    cin >> n >> m;
+
+    multiset<ll> tickets;
+    vector<ll> maxp(m, 0);
+
+    for(ll i=0; i<n; i++){
+        ll x;
+        cin >> x;
+        tickets.insert(x);
     }
-    else {
-      printf("%d", tickets[lower-tickets.begin()]);
-      printf("\n");
-      tickets.erase(tickets.begin()+(lower-tickets.begin()));
+
+    for(ll i=0; i<m; i++){
+        cin >> maxp[i];
     }
-  }
+
+    ll ans=-1;
+
+    for(ll i=0; i<m; i++){
+        ans=-1;
+        if(!tickets.empty()){
+            auto it = tickets.upper_bound(maxp[i]);
+            if(it!=tickets.begin()){
+                it--;
+            }
+            if(*it<=maxp[i]){
+                ans = *it;
+                tickets.erase(it);
+            }
+        }
+        cout << ans << endl;
+    }
 }
+
+// Etaw
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// int main() {
+//   int n, m; scanf("%d %d", &n, &m);
+//   vector<int> tickets(n);
+//   for (int i=0; i<n; i++) {
+//     scanf("%d", &tickets[i]);
+//   }
+//   vector<int> customers(m);
+//   for (int i=0; i<m; i++) {
+//     scanf("%d", &customers[i]);
+//   }
+//   sort(tickets.begin(), tickets.end(), greater<int> ());
+//   for (int i=0; i<m; i++) {
+//     auto lower=lower_bound(tickets.begin(), tickets.end(), customers[i], greater<int>());
+//     if (lower==tickets.end()) {
+//       printf("%d", -1);
+//       printf("\n");
+//       continue;
+//     }
+//     else {
+//       printf("%d", tickets[lower-tickets.begin()]);
+//       printf("\n");
+//       tickets.erase(tickets.begin()+(lower-tickets.begin()));
+//     }
+//   }
+// }

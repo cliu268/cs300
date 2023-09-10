@@ -21,3 +21,38 @@ Example Input:
 Example Output:
 9
 */
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+ 
+int main() {
+  ll n; scanf("%lld", &n);
+  ll prefix[n+1]; prefix[0]=0;
+  ll mini[n+1]; mini[0]=0;
+  for (ll i=1; i<=n; i++) {
+    ll x; cin>>x;
+    prefix[i]=prefix[i-1]+x;
+    if (i==1) {
+      mini[i]=x;
+    }
+    else {
+      mini[i]=min(prefix[i], mini[i-1]);
+    }
+  }
+  // vector<ll> change; change.push_back(1);
+  // ll currmax=prefix[1];
+  // for (ll i=2; i<=n; i++) {
+  //   if (prefix[i]>currmax) {
+  //     currmax=prefix[i];
+  //     change.push_back(i);
+  //   }
+  // }
+  ll ans=-100000000000000000;
+  // for (ll i=0; i<change.size(); i++) {
+  //   ans=max(ans, max(prefix[change[i]], prefix[change[i]]-mini[change[i]-1]));
+  // }
+  for (ll i=1; i<=n; i++) {
+    ans=max(ans, max(prefix[i], prefix[i]-mini[i-1]));
+  }
+  cout<<ans;
+}

@@ -1,5 +1,6 @@
 // Rope Cutting
 // https://xjoi.net/contest/4659/problem/3
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6463&fragments=12038&problemId=3579
 /*
 Time  limit: 0.2s   Memory limit: 32M
 Description:

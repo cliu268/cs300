@@ -1,6 +1,7 @@
 // Why Did the Cow Cross the Road II
 // https://xjoi.net/contest/4516/problem/3
 // http://www.usaco.org/index.php?page=viewproblem2&cpid=715
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6458&fragments=12036&problemId=15285
 /*
 The long road through Farmer John's farm has N crosswalks across it, conveniently numbered 1…N (1≤N≤100,000). To allow cows 
 to cross at these crosswalks, FJ installs electric crossing signals, which light up with a green cow icon when it is ok for 

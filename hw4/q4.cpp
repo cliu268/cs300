@@ -1,6 +1,7 @@
 // Diamond Collector
 // https://xjoi.net/contest/4456/problem/4
 // http://www.usaco.org/index.php?page=viewproblem2&cpid=643
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6464&fragments=12034&problemId=15262
 /*
 Bessie the cow, always a fan of shiny objects, has taken up a hobby of mining diamonds in her spare time! She has collected N 
 diamonds (N≤50,000) of varying sizes, and she wants to arrange some of them in a pair of display cases in the barn.
@@ -43,3 +44,4 @@ the results from the left and right subarrays is the answer if you split the dia
 4. Now look at above steps again: because you need to do (2) for each diamond, the time complexity isn't great. 
 Is there a way to speed it up?
 */
+// USACO Java solution http://www.usaco.org/current/data/sol_diamond_silver_open16.html

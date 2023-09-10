@@ -1,5 +1,6 @@
 // Sum of Three Values
 // https://xjoi.net/contest/4456/problem/2
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6464&fragments=12034&problemId=14096
 /*
 Description:
 You are given an array of n integers, and your task is to find three values (at distinct positions) whose sum is x.
@@ -17,12 +18,13 @@ Sample input:
 2 7 5 1
 
 Sample output:
-1 3 4
+4 1 3
 
 Constraints:
 1 <= n <= 5000
 1 <= x, a_i <= 10^9
 */
+// Ev
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -95,3 +97,46 @@ int main(){
         }
     }
 }
+
+// Etaw old
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// struct IntegerAndIndex {
+//   int value;
+//   int index;
+//   // For std::sort(): how to compare two IntegerAndIndex objects.
+//   bool operator<(IntegerAndIndex b) {
+//     return (value < b.value) || (value == b.value && index < b.index);
+//   }
+// };
+ 
+// int main() {
+//   int N, X;
+//   scanf("%d %d", &N, &X);
+//   IntegerAndIndex int_indexs[N];
+//   for (int i = 0; i < N; i++) {
+//     scanf("%d", &int_indexs[i].value);
+//     int_indexs[i].index = i;
+//   }
+//   // Sort with custom comparator defined in struct IntegerAndIndex.
+//   sort(int_indexs, int_indexs + N);
+ 
+//   // 300B coding exercise
+//   for (int x=0; x<N-2; x++) {
+//     int i=x+1; int j=N-1;
+//     while (i<j) {
+//       if ((int_indexs[i].value+int_indexs[j].value+int_indexs[x].value)==X) {
+//         cout<<int_indexs[x].index+1<<" "<<int_indexs[i].index+1<<" "<<int_indexs[j].index+1;
+//         return 0;
+//       }
+//       if ((int_indexs[i].value+int_indexs[j].value+int_indexs[x].value)<X) {
+//         i++;
+//       }
+//       if ((int_indexs[i].value+int_indexs[j].value+int_indexs[x].value)>X) {
+//         j--;
+//       }
+//     }
+//   }
+//   cout<<"IMPOSSIBLE";
+// }

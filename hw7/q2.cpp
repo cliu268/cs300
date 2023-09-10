@@ -1,5 +1,6 @@
 // Cutting Wood
 // https://xjoi.net/contest/4659/problem/2
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6463&fragments=12038&problemId=8466
 /*
 Xiao Hua is called by Da Lin to chop down trees. He needs to get total m meters of wood. Now, Xiaohua got a strange logging 
 machine. It works like this: Xiaohua sets a height limit h (meters), then the machine raises the saw blade to the height of h 
@@ -35,3 +36,85 @@ Data size:
 70% data satisfies: 1≤n≤10^3, 1≤m≤10^4.
 100% data satisfies: 1≤n≤10^6, 1≤m≤2×10^9
 */
+// Etaw 
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+ 
+int main() {
+  ll n, m; scanf("%lld %lld", &n, &m);
+  vector<ll> trees(n);
+  ll maxi=0;
+  for (ll i=0; i<n; i++) {
+    scanf("%lld", &trees[i]);
+    maxi=max(maxi, trees[i]);
+  }
+  sort(trees.begin(), trees.end());
+  ll left=0; ll right=maxi;
+  ll ans=0;
+  while (left<=right) {
+    ll middle=(left+right)/2;
+    ll sum=0;
+    for (ll i=0; i<n; i++) {
+      if (middle<trees[i]) {
+        sum+=(trees[i]-middle);
+      }
+    }
+    if (sum>=m) {
+      ans=max(ans, middle);
+      left=middle+1;
+    }
+    if (sum<m) {
+      right=middle-1;
+    }
+  }
+  cout<<ans;
+}
+// Ev
+// #include<bits/stdc++.h>
+// using namespace std;
+// typedef long long ll;
+// ll n, m;
+// multiset<ll> wood;
+
+// bool works(ll middle){
+//     ll sum=0;
+//     for (auto it = wood.begin(); it != wood.end(); it++){
+//         if(*it > middle){
+//             sum += *it - middle;
+//         }
+//     }
+//     if(sum>=m){
+//         return true;
+//     }
+//     return false;
+// }
+
+// int main(){
+
+//     cin >> n >> m;
+
+//     for(int i=0; i<n; i++){
+//         ll x;
+//         cin >> x;
+//         wood.insert(x);
+//     }
+
+//     ll h=0;
+//     auto it= wood.end();
+//     it--;
+//     ll l=0, r= *it;
+
+//     while(l<=r){
+//         ll mid = (l+r)/2;
+//         if(works(mid)){
+//             h=mid;
+//             l=mid+1;
+//         }
+//         else{
+//             r = mid-1;
+//         }
+//     }
+
+//     cout << h << endl;
+// }

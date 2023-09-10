@@ -1,0 +1,1 @@
+// same as hw4 q2.cpp

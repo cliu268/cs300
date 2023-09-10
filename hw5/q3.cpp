@@ -1,5 +1,6 @@
 // Maximum Subarray Sum II
 // https://xjoi.net/contest/4492/problem/3
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6459&fragments=12035&problemId=14099
 /*
 Given an array of n integers, your task is to find the maximum sum of values in a contiguous subarray with length between a and b.
 

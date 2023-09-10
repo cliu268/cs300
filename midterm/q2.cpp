@@ -1,6 +1,7 @@
 // Diamond Collector
 // https://xjoi.net/contest/4516/problem/2
 // http://www.usaco.org/index.php?page=viewproblem2&cpid=639
+// https://www.xinyoudui.com/contest?courses=519&books=255&pages=6458&fragments=12036&problemId=15253
 /*
 Bessie the cow, always a fan of shiny objects, has taken up a hobby of mining diamonds in her spare time! She has collected 
 N diamonds (N≤1000) of varying sizes, and she wants to arrange some of them in a display case in the barn.
